@@ -23,6 +23,8 @@ abstract class PostgresGenerator {
         s = value.value;
       else if (value is String) {
         var b = StringBuffer();
+        // add single quote at the start of string
+        b.write("\'");
         for (var ch in value.codeUnits) {
           if (ch == $single_quote) {
             b.write("\\'");
@@ -30,6 +32,8 @@ abstract class PostgresGenerator {
             b.writeCharCode(ch);
           }
         }
+        // add single quote at the end of string
+        b.write("\'");
         s = b.toString();
       } else {
         s = value.toString();
